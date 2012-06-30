@@ -1,0 +1,34 @@
+defscrollback 10000
+activity ""
+altscreen off
+autodetach on
+chdir
+defbce on
+defscrollback 99999
+defutf8 on
+escape ``
+msgwait 1
+multiuser on
+nonblock on
+shell -${SHELL}
+shelltitle "$ |bash"
+startup_message off
+nethack on
+vbell off
+termcapinfo xterm*|rxvt-* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+termcapinfo xterm*|rxvt-* 'ti@:te@'
+term xterm-256color
+attrcolor b ".I"
+defbce on
+bind c screen 1
+bind ^c screen 1
+bind 0 select 10
+bind ^k
+bind k
+bind K kill
+bind f fit
+bind F flow
+hardstatus off
+hardstatus string "%{= B}[ %{G}${USER}%{w}@%{G}%H %{B}]%< %{= w}%?%-Lw%?%{= R}> %{W}%n%f*%?(%u)%?%t %{R}<%{w}%?%+Lw%?%<"
+hardstatus alwayslastline
+screen 1
