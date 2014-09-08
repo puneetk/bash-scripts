@@ -1,98 +1,32 @@
-if &compatible          " only if not set before:
- set nocompatible      " use vim-defaults instead of vi-defaults (easier, more user friendly)
+if &compatible
+ set nocompatible
 endif
-
-" display settings
-set background=dark     " enable for dark terminals
-set nowrap              " dont wrap lines
-set scrolloff=2         " 2 lines above/below cursor when scrolling
-set nonumber              " show line numbers
-set showmatch           " show matching bracket (briefly jump)
-set showmode            " show mode in status bar (insert/replace/...)
-set showcmd             " show typed command in status bar
-set ruler               " show cursor position in status bar
-set title               " show file in titlebar
-set wildmenu            " completion with menu
-set wildignore=*.o,*.obj,*.bak,*.exe,*.py[co],*.swp,*~,*.pyc,.svn
-set laststatus=2        " use 2 lines for the status bar
-set matchtime=2         " show matching bracket for 0.2 seconds
-set matchpairs+=<:>     " specially for html
-
-" editor settings
-set esckeys             " map missed escape sequences (enables keypad keys)
-set ignorecase          " case insensitive searching
-set smartcase           " but become case sensitive if you type uppercase characters
-set smartindent         " smart auto indenting
-set smarttab            " smart tab handling for indenting
-set magic               " change the way backslashes are used in search patterns
-set bs=indent,eol,start " Allow backspacing over everything in insert mode
-
-set tabstop=4           " number of spaces a tab counts for
-set shiftwidth=4        " spaces for autoindents
-set expandtab           " turn a tabs into spaces
-
-set fileformat=unix     " file mode is unix
-
-" system settings
-set lazyredraw          " no redraws in macros
-set confirm             " get a dialog when :q, :w, or :wq fails
-set nobackup            " no backup~ files.
-set viminfo='20,\"500   " remember copy registers after quitting in the .viminfo file -- 20 jump links, regs up to 500 lines'
-set hidden              " remember undo after quitting
-set history=10000          " keep 50 lines of command history
-
-
-if &t_Co > 2 || has("gui_running")
- syntax on          " enable colors
- set hlsearch       " highlight search (very useful!)
- set incsearch      " search incremently (search while typing)
-endif
-
-" paste mode toggle (needed when using autoindent/smartindent)
-set pastetoggle=<F11>
-
-" Use of the filetype plugins, auto completion and indentation support
 filetype plugin indent on
-
-" file type specific settings
+set fileformat=unix, confirm, history=10000
+set background=dark, nowrap, scrolloff=2, nonumber
+set showmatch, showmode, showcmd, ruler, title, wildmenu
+set wildignore=*.o,*.obj,*.bak,*.exe,*.py[co],*.swp,*~,*.pyc,.svn
+set laststatus=2, matchtime=2, hidden, esckeys
+set ignorecase, smartcase, magic
+set smartindent, smarttab
+set bs=indent,eol,start
+set tabstop=4, shiftwidth=4, expandtab, foldmethod=indent
+set lazyredraw, nobackup
+set viminfo='20,\"500
+if &t_Co > 2 || has("gui_running")
+ syntax on
+ set hlsearch
+ set incsearch
+endif
+set pastetoggle=<F11>
 if has("autocmd")
-
- " change to directory of current file automatically
- " autocmd BufEnter * lcd %:p:h
-
- " Put these in an autocmd group, so that we can delete them easily.
  augroup mysettings
    au FileType xslt,xml,css,html,xhtml,javascript,sh,config,c,cpp,docbook set smartindent shiftwidth=2 softtabstop=2 expandtab
    au FileType tex set wrap shiftwidth=2 softtabstop=2 expandtab
-
-   " Confirm to PEP8
-   au FileType python,php set tabstop=4 softtabstop=4 expandtab shiftwidth=4 cinwords=if,elif,else,for,while,try,except,finally,def,class
+   au FileType python,php set tabstop=4 softtabstop=4 expandtab shiftwidth=4 cinwords=if,elif,else,for,while,try,except,finally,de
+f,class
  augroup END
-
- augroup perl
-   " reset (disable previous 'augroup perl' settings)
-   au!
-
-   au BufReadPre,BufNewFile
-   \ *.pl,*.pm
-   \ set formatoptions=croq smartindent shiftwidth=2 softtabstop=2 cindent cinkeys='0{,0},!^F,o,O,e' " tags=./tags,tags,~/devel/tags,~/devel/C
-   " formatoption:
-   "   t - wrap text using textwidth
-   "   c - wrap comments using textwidth (and auto insert comment leader)
-   "   r - auto insert comment leader when pressing <return> in insert mode
-   "   o - auto insert comment leader when pressing 'o' or 'O'.
-   "   q - allow formatting of comments with gq
-   "   a - auto formatting for paragraphs
-   "   n - auto wrap numbered lists
-   "
- augroup END
-
-
- " Always jump to the last known cursor position.
- " Don't do it when the position is invalid or when inside
- " an event handler (happens when dropping a file on gvim).
- autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |   exe "normal g`\"" |  endif
-
 endif " has("autocmd")
 
-set foldmethod=indent
+autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |   exe "normal g`\"" |  endif
+execute pathogen#infect()
