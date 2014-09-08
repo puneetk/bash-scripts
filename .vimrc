@@ -12,7 +12,7 @@ set smartindent smarttab
 set bs=indent,eol,start
 set tabstop=4 shiftwidth=4 expandtab foldmethod=indent
 set lazyredraw nobackup
-
+set viminfo='20,\"500
 if &t_Co > 2 || has("gui_running")
  syntax on
  set hlsearch
