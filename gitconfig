@@ -1,32 +1,14 @@
+[commit]
+    gpgsign = true
+[tag]
+    gpgsign = true
+[gpg "x509"]
+    program = gitsign
+[gpg]
+    format = x509
 [user]
-    name = puneet
-    email = <@email@>
-[color]
-    diff = auto
-    status = auto
-    interactive = auto
-    branch = auto
-    ui = true
-    pager = true 
-[core]
-    autocrlf = input
-[alias]
-    prune-all = !git remote | xargs -n 1 git remote prune
-    lg = log --oneline --no-merges --name-status --pretty=format:'%Cred%h%Creset - %s%n%C(yellow)%d%Creset %Cgreen(%an - %cr)%Creset' --abbrev-commit
-    history = log --first-parent --remove-empty --no-merges --name-status --pretty=format:'%Cred%h%Creset - %s%n%C(yellow)%d%Creset %Cgreen(%an - %cr)%Creset' --abbrev-commit
-    cmp = log --left-right --name-only --oneline --no-merges
-    st = status
-    c = commit
-    df = diff --color -w
-    dfp = diff --color -w --word-diff=plain
-    changes = !sh -c 'git rev-list --oneline --pretty=format:\"%m%Cred%h%Creset %C(yellow)%d%Creset %Cgreen(%cr - %an)%Creset - %s\" --no-merges --reverse --left-right $1...$2 | egrep -e \"^<\" | sed \"s/<//
-    graph = log --graph --oneline --decorate
-    staged = diff --cached
-    w = whatchanged -p -c -w --color
-    list = shortlog --format='* %s' --no-merges
-    opened = diff --name-only
-    show-feature-diff=!sh -c 'git log -p --boundary $0~1..$0'
-    co=!sh -c 'git checkout `git branch -r | grep $1 | head -n 1 | sed "s@origin/@@"`' -
+    name = <>
+    email = <>
 [apply]
     whitespace = fix
 [diff]
@@ -35,3 +17,19 @@
     tool = vimdiff
 [push]
     default = matching
+[color]
+    diff = auto
+    status = auto
+    interactive = auto
+    branch = auto
+    ui = true
+    pager = true
+[alias]
+    history = log --first-parent --remove-empty --no-merges --name-status --pretty=format:'%Cred%h%Creset - %s%n%C(yellow)%d%Creset %Cgreen(%an - %cr)%Creset' --abbrev-commit
+    lg = log --oneline --no-merges --name-status --pretty=format:'%Cred%h%Creset - %s%n%C(yellow)%d%Creset %Cgreen(%an - %cr)%Creset' --abbrev-commit
+    graph = log --graph --oneline --decorate
+    staged = diff --cached
+    w = whatchanged -p -c -w --color
+
+[url "git@github.com:"]
+        insteadOf = https://github.com/
